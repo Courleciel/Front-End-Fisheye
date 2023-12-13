@@ -7,24 +7,29 @@ function photographerTemplate(data) {
 
       const img = document.createElement('img');
       img.setAttribute("src", picture);
-      img.setAttribute("alt", `Portrait de ${name}`);
+      img.setAttribute("alt", `${name}`);
+      img.classList.add('photographer-portrait');
 
       const h2 = document.createElement('h2');
       h2.textContent = name;
-
-      const taglineElement = document.createElement('p');
-      taglineElement.textContent = tagline;
+      h2.classList.add('photographer-name');
 
       const locationElement = document.createElement('p');
       locationElement.textContent = `${city}, ${country}`;
+      locationElement.classList.add('photographer-location');
+
+      const taglineElement = document.createElement('p');
+      taglineElement.textContent = tagline;
+      taglineElement.classList.add('photographer-tagline');
 
       const priceElement = document.createElement('p');
       priceElement.textContent = `${price}€/jour`;
+      priceElement.classList.add('photographer-price');
 
       article.appendChild(img);
       article.appendChild(h2);
-      article.appendChild(taglineElement);
       article.appendChild(locationElement);
+      article.appendChild(taglineElement);
       article.appendChild(priceElement);
 
       return article;
