@@ -7,9 +7,6 @@
           }
           const data = await response.json();
 
-          // Faire un console.log des données pour vérification
-          console.log(data.photographers);
-
           // Retourner les données
           return data.photographers;
       } catch (error) {
