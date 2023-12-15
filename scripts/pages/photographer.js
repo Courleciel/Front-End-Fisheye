@@ -1,3 +1,4 @@
+import photographerTemplate from "../templates/photographer.js";
 async function fetchData() {
   try {
       const response = await fetch('/data/photographers.json');
@@ -16,8 +17,13 @@ function getPhotographerId() {
 }
 
 function displayPhotographer(photographer) {
-  // Ici, vous pouvez créer et ajouter des éléments HTML pour afficher les informations du photographe
-  console.log(photographer);
+  const photographerSection = document.querySelector(".photograph-header");
+  const elements = photographerTemplate(photographer).getUserHeader();
+
+  // Itérer sur chaque élément du tableau et les ajouter au DOM
+  elements.forEach(element => {
+    photographerSection.appendChild(element);
+  });
 }
 
 function displayMedia(media) {
