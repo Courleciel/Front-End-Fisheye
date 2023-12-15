@@ -5,6 +5,10 @@ body {
     margin: 0;
 }
 
+footer {
+  height: 100px;
+}
+
 
 header {
     display: flex;
