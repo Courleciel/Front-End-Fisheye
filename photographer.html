@@ -4,18 +4,21 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - Photographe</title>
   </head>
   <body>
     <header>
       <a href="/index.html">
-        <img src="assets/images/logo.png" class="logo" alt="Logo de Fisheye" />
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
       </a>
     </header>
     <main id="main">
       <section class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      </section>
+      <section id="mediaContainer" class="photograph-media-container">
       </section>
     </main>
     <div id="contact_modal">
@@ -35,6 +38,8 @@
 				</form>
 			</div>
 		</div>
+    <div id="photographer-info-container">
+    </div>
     <script src="/scripts/templates/photographer.js" type="module"></script>
     <script src="/scripts/pages/photographer.js" type="module"></script>
     <script src="/scripts/utils/contactForm.js"></script>

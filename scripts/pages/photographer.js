@@ -1,13 +1,15 @@
 import photographerTemplate from "../templates/photographer.js";
+import mediaFactory from "../factories/MediaFactory.js";
+
 async function fetchData() {
   try {
-      const response = await fetch('/data/photographers.json');
-      if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return await response.json();
+    const response = await fetch('/data/photographers.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
   } catch (error) {
-      console.error('Could not fetch data:', error);
+    console.error('Could not fetch data:', error);
   }
 }
 
@@ -20,15 +22,28 @@ function displayPhotographer(photographer) {
   const photographerSection = document.querySelector(".photograph-header");
   const elements = photographerTemplate(photographer).getUserHeader();
 
-  // Itérer sur chaque élément du tableau et les ajouter au DOM
   elements.forEach(element => {
     photographerSection.appendChild(element);
   });
 }
 
-function displayMedia(media) {
-  // Ici, vous pouvez créer et ajouter des éléments HTML pour afficher les médias du photographe
-  console.log(media);
+function displayMedia(mediaArray, photographerName) {
+  const mediaContainer = document.querySelector("#mediaContainer");
+
+  mediaArray.forEach(media => {
+    const mediaElement = mediaFactory(media, photographerName);
+    mediaContainer.appendChild(mediaElement);
+  });
+}
+
+function displayPhotographerInfo(photographer, mediaArray) {
+  const totalLikes = mediaArray.reduce((acc, media) => acc + media.likes, 0);
+
+  const infoContainer = document.getElementById('photographer-info-container');
+  infoContainer.innerHTML = `
+    <p>${totalLikes} <i class="fa-solid fa-heart"></i></p>
+    <p>${photographer.price}€ / jour</p>
+  `;
 }
 
 async function init() {
@@ -36,16 +51,15 @@ async function init() {
   const photographerId = getPhotographerId();
 
   if (data) {
-      const photographer = data.photographers.find(p => p.id == photographerId);
+    const photographer = data.photographers.find(p => p.id == photographerId);
+    if (photographer) {
+      displayPhotographer(photographer);
       const media = data.media.filter(m => m.photographerId == photographerId);
-
-      if (photographer) {
-          displayPhotographer(photographer);
-      }
-
       if (media.length > 0) {
-          displayMedia(media);
+        displayMedia(media, photographer.name);
+        displayPhotographerInfo(photographer, media);
       }
+    }
   }
 }
 
