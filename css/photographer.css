@@ -19,6 +19,7 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    order: 2;
 }
 
 .modal {
@@ -107,8 +108,18 @@ font-size: 10px;
 
 .photograph-header {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .photographer-article {
   display: flex;
+}
+
+.photographer-info {
+  order: 1;
+}
+
+#photographerImage {
+  order: 3;
 }

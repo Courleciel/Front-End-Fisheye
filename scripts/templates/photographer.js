@@ -49,6 +49,7 @@ export default function photographerTemplate(data) {
       img.setAttribute("src", picture);
       img.setAttribute("alt", name);
       img.classList.add('photographer-portrait');
+      img.setAttribute("id", "photographerImage");
 
       const infoContainer = document.createElement('div');
       infoContainer.classList.add('photographer-info');
