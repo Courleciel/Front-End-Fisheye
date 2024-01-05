@@ -25,6 +25,9 @@ function displayPhotographer(photographer) {
   elements.forEach(element => {
     photographerSection.appendChild(element);
   });
+
+  const contactButton = document.querySelector(".contact_button");
+  contactButton.onclick = () => displayModal(photographer.name);
 }
 
 function displayMedia(mediaArray, photographerName) {

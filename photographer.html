@@ -21,20 +21,27 @@
       <section id="mediaContainer" class="photograph-media-container">
       </section>
     </main>
-    <div id="contact_modal">
+    <div id="overlay"></div>
+    <div id="contact_modal" aria-hidden="true" aria-modal="true" role="dialog">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
+          <h2></h2>
           <button onclick="closeModal()" aria-label="Fermer le formulaire de contact" class="modal_close_button">
-            <img src="assets/icons/close.svg" alt="Icône de fermeture"/>
+            <img src="assets/icons/close.svg" alt="Close Contact form"/>
           </button>
         </header>
 				<form>
 					<div>
 						<label for="firstname">Prénom</label>
 						<input type="text" id="firstname" name="firstname"/>
+            <label for="lastname">Nom</label>
+						<input type="text" id="lastname" name="lastname"/>
+            <label for="email">Email</label>
+						<input type="text" id="email" name="email"/>
+            <label for="yourmessage">Votre message</label>
+						<input type="text" id="yourmessage" name="yourmessage"/>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" id="modal_contact_button"  alt="Send">Envoyer</button>
 				</form>
 			</div>
 		</div>
