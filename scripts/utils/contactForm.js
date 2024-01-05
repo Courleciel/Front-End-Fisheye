@@ -15,7 +15,7 @@ function closeModal() {
     const modal = document.getElementById("contact_modal");
     const overlay = document.getElementById("overlay");
     modal.style.display = "none";
-    overlay.style.display = "none"; // Masquer l'overlay
+    overlay.style.display = "none";
     modal.setAttribute('aria-hidden', 'true');
     document.querySelector(".contact_button").focus();
 }
