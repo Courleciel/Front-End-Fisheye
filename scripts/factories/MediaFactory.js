@@ -13,6 +13,7 @@ function createVideoElement(media, photographerName) {
   video.classList.add('photographer-videos');
   video.src = `assets/FishEye_Photos/Sample Photos/${photographerName}/${media.video}`;
   video.controls = true;
+  video.setAttribute('aria-label', media.title);
   return video;
 }
 
