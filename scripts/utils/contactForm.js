@@ -7,9 +7,10 @@ function displayModal(photographerName) {
   overlay.style.display = "block";
   modal.setAttribute('aria-hidden', 'false');
   document.getElementById("firstname").focus();
+  const croix = document.getElementById("modal_close")
+  croix.onclick = () => closeModal();
   trapFocus(modal);
 }
-
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
@@ -61,3 +62,5 @@ document.getElementById('modal_contact_button').addEventListener('click', (e) =>
       console.log(`${input.name}: ${input.value}`);
   });
 });
+
+export { displayModal , closeModal}

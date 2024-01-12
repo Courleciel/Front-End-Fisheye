@@ -1,5 +1,6 @@
 import photographerTemplate from "../templates/photographer.js";
 import mediaFactory from "../factories/MediaFactory.js";
+import { displayModal} from "../utils/contactForm.js";
 
 let currentIndex = 0;
 let mediaList = [];
@@ -39,7 +40,6 @@ function displayMedia(mediaArray, photographerName, photographer) {
   const mediaContainer = document.querySelector("#mediaContainer");
 
   mediaArray.forEach(media => {
-    console.log("Traitement du média : ", media);
       const mediaElement = mediaFactory(media, photographerName);
       mediaContainer.appendChild(mediaElement);
       media.liked = false;
@@ -49,10 +49,7 @@ function displayMedia(mediaArray, photographerName, photographer) {
       const likeIcon = document.getElementById(`like-${media.id}`);
       likeIcon.addEventListener('click', () => handleLikeClick(media, photographer, mediaArray));
   });
-
-  initLightbox();
 }
-
 
 function displayPhotographerInfo(photographer, mediaArray) {
   const totalLikes = mediaArray.reduce((acc, media) => acc + Number(media.likes), 0);
@@ -189,7 +186,6 @@ function initLightbox() {
 }
 
 function sortMedia(criteria, photographer, mediaArray) {
-  console.log("Avant le tri : ", mediaArray);
   if (criteria === 'likes') {
     mediaArray.sort((a, b) => b.likes - a.likes);
   } else if (criteria === 'title') {
