@@ -286,3 +286,28 @@ font-size: 10px;
 .overlay-body {
   overflow: hidden;
 }
+
+.sort-options {
+  font-family: "DM Sans", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+#sort-select {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 150px;
+  height: 60px;
+  border: none;
+  background-color: #901C1C;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+option {
+  padding: 20px;
+}

@@ -3,6 +3,7 @@ import mediaFactory from "../factories/MediaFactory.js";
 
 let currentIndex = 0;
 let mediaList = [];
+let mediaArray = [];
 let previouslyFocusedElement = null; // Pour stocker l'élément précédemment focalisé
 
 async function fetchData() {
@@ -38,6 +39,7 @@ function displayMedia(mediaArray, photographerName, photographer) {
   const mediaContainer = document.querySelector("#mediaContainer");
 
   mediaArray.forEach(media => {
+    console.log("Traitement du média : ", media);
       const mediaElement = mediaFactory(media, photographerName);
       mediaContainer.appendChild(mediaElement);
       media.liked = false;
@@ -170,7 +172,7 @@ function initLightbox() {
     document.addEventListener('keydown', (e) => {
         const lightboxVisible = document.getElementById('lightbox').style.display === 'block';
         if (!lightboxVisible) {
-            return; // Si la lightbox n'est pas ouverte, ne pas traiter les événements clavier
+            return;
         }
 
         if (e.key === 'Escape') {
@@ -183,7 +185,26 @@ function initLightbox() {
     });
 
     const lightbox = document.getElementById('lightbox');
-    lightbox.setAttribute('tabindex', '-1'); // Permettre à la lightbox de recevoir le focus
+    lightbox.setAttribute('tabindex', '-1');
+}
+
+function sortMedia(criteria, photographer, mediaArray) {
+  console.log("Avant le tri : ", mediaArray);
+  if (criteria === 'likes') {
+    mediaArray.sort((a, b) => b.likes - a.likes);
+  } else if (criteria === 'title') {
+    mediaArray.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (criteria === 'date') {
+    mediaArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+
+  const mediaContainer = document.querySelector("#mediaContainer");
+  mediaContainer.innerHTML = '';
+
+  displayMedia(mediaArray, photographer.name, photographer);
+
+  initLightbox();
+
 }
 
 async function init() {
@@ -194,12 +215,15 @@ async function init() {
       const photographer = data.photographers.find(p => p.id == photographerId);
       if (photographer) {
           displayPhotographer(photographer);
-          const mediaArray = data.media.filter(m => m.photographerId == photographerId);
+          mediaArray = data.media.filter(m => m.photographerId == photographerId);
           if (mediaArray.length > 0) {
               displayMedia(mediaArray, photographer.name, photographer);
               displayPhotographerInfo(photographer, mediaArray);
           }
       }
+      document.getElementById('sort-select').addEventListener('change', (event) => {
+        sortMedia(event.target.value, photographer, mediaArray);
+      });
   }
 }
 
