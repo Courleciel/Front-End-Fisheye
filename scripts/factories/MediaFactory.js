@@ -30,6 +30,8 @@ function createMediaElement(media, photographerName, isVideo) {
   title.classList.add('media-title');
   likes.classList.add('media-likes');
   likeIcon.classList.add('fa-solid', 'fa-heart');
+  likeIcon.setAttribute('aria-label', 'likes');
+  likeIcon.id = `like-${media.id}`
 
   title.textContent = media.title;
   likes.textContent = `${media.likes} `;
