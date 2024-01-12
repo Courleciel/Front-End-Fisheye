@@ -60,13 +60,17 @@ function openLightbox(index) {
     const overlayLightbox = document.getElementById('overlay-lightbox');
     const img = document.getElementById('lightbox-img');
     const video = document.getElementById('lightbox-video');
+    img.style.display = "none";
+    video.style.display = "none";
+    img.src = "";
+    video.src = "";
 
     if (mediaList[currentIndex].tagName == "IMG"){
       img.src = mediaList[currentIndex].src;
-      video.src = ""
+      img.style.display = "block";
     } else {
       video.src = mediaList[currentIndex].src;
-      img.src = ""
+      video.style.display = "block";
     }
 
     lightbox.style.display = "block"
@@ -88,12 +92,19 @@ function changeMedia(step) {
         currentIndex = mediaList.length - 1;
     }
 
+    const img = document.getElementById('lightbox-img');
+    const video = document.getElementById('lightbox-video');
+    img.style.display = "none";
+    video.style.display = "none";
+    img.src = "";
+    video.src = "";
+
     if (mediaList[currentIndex].tagName == "IMG"){
-      document.getElementById('lightbox-img').src = mediaList[currentIndex].src;
-      document.getElementById('lightbox-video').src = "";
+      img.src = mediaList[currentIndex].src;
+      img.style.display = "block";
     } else {
-      document.getElementById('lightbox-video').src = mediaList[currentIndex].src;
-      document.getElementById('lightbox-img').src= "";
+      video.src = mediaList[currentIndex].src;
+      video.style.display = "block";
     }
 }
 
