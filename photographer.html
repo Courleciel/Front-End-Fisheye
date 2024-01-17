@@ -21,10 +21,11 @@
       <div class="sort-options">
         <label for="sort-select">Trier par </label>
         <select id="sort-select">
+          <option value="" disabled selected></option>
           <option value="likes">Popularité</option>
           <option value="title">Titre</option>
           <option value="date">Date</option>
-        </select>
+      </select>
       </div>
       <section id="mediaContainer" class="photograph-media-container">
       </section>
@@ -60,6 +61,7 @@
       <span class="lightbox-close" aria-label="Close dialog">&times;</span>
       <img class="lightbox-content" id="lightbox-img" src=""/>
       <video class="lightbox-content-video" id="lightbox-video" src="" controls></video>
+      <h2 id="lightbox-title" class="lightbox-title"></h2>
       <a class="lightbox-prev" aria-label="Previous Image">&#10094;</a>
       <a class="lightbox-next" aria-label="Next image">&#10095;</a>
     </div>

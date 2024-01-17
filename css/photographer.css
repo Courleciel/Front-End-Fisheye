@@ -311,3 +311,16 @@ font-size: 10px;
 option {
   padding: 20px;
 }
+
+#lightbox-title {
+  color: #901C1C;
+  font-family: DM Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  position: absolute;
+  left: 50%; /* Placez le titre au milieu horizontalement */
+  transform: translate(-50%, -50%); /* Déplacez le titre au centre */
+}
