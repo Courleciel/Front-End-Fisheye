@@ -58,7 +58,6 @@ function displayMedia(mediaArray, photographerName, photographer) {
         likeIcon.addEventListener('click', () => handleLikeClick(media, photographer, mediaArray));
     });
 
-    initLightbox();
 }
 
 // Fonction pour afficher les informations du photographe (likes et tarif)
@@ -179,32 +178,34 @@ function initLightbox() {
     const prevButton = document.querySelector('.lightbox-prev');
 
     if (closeButton) {
-        closeButton.addEventListener('click', closeLightbox);
+      closeButton.onclick = () => closeLightbox();
     }
     if (nextButton) {
-        nextButton.addEventListener('click', () => changeMedia(1));
+        nextButton.onclick = () => changeMedia(1);
     }
     if (prevButton) {
-        prevButton.addEventListener('click', () => changeMedia(-1));
+      prevButton.onclick = () => changeMedia(-1);
     }
-
-    document.addEventListener('keydown', (e) => {
-        const lightboxVisible = document.getElementById('lightbox').style.display === 'block';
-        if (!lightboxVisible) {
-            return;
-        }
-
-        if (e.key === 'Escape') {
-            closeLightbox();
-        } else if (e.key === 'ArrowRight') {
-            changeMedia(1);
-        } else if (e.key === 'ArrowLeft') {
-            changeMedia(-1);
-        }
-    });
+    document.removeEventListener('keydown', changeMediaByKeydown)
+    document.addEventListener('keydown', changeMediaByKeydown);
 
     const lightbox = document.getElementById('lightbox');
     lightbox.setAttribute('tabindex', '-1');
+}
+
+function changeMediaByKeydown(e) {
+  const lightboxVisible = document.getElementById('lightbox').style.display === 'block';
+  if (!lightboxVisible) {
+      return;
+  }
+
+  if (e.key === 'Escape') {
+      closeLightbox();
+  } else if (e.key === 'ArrowRight') {
+      changeMedia(1);
+  } else if (e.key === 'ArrowLeft') {
+      changeMedia(-1);
+  }
 }
 
 // Fonction pour trier les médias du photographe en fonction du critère choisi
@@ -219,10 +220,11 @@ function sortMedia(criteria, photographer, mediaArray) {
 
     const mediaContainer = document.querySelector("#mediaContainer");
     mediaContainer.innerHTML = '';
-
+    const nextButton = document.querySelector('.lightbox-next');
+    nextButton.removeEventListener('click', () => changeMedia(1), true);
     displayMedia(mediaArray, photographer.name, photographer);
-    mediaList = Array.from(document.querySelectorAll("#mediaContainer img, #mediaContainer video"));
     initLightbox();
+    mediaList = Array.from(document.querySelectorAll("#mediaContainer img, #mediaContainer video"));
 }
 
 // Fonction d'initialisation principale
@@ -237,6 +239,7 @@ async function init() {
             mediaArray = data.media.filter(m => m.photographerId == photographerId);
             if (mediaArray.length > 0) {
                 displayMedia(mediaArray, photographer.name, photographer);
+                initLightbox();
                 displayPhotographerInfo(photographer, mediaArray);
             }
         }
@@ -245,7 +248,7 @@ async function init() {
         document.getElementById('sort-select').addEventListener('change', (event) => {
             sortMedia(event.target.value, photographer, mediaArray);
         });
-    }
+      }
 }
 
 // Appel de la fonction d'initialisation

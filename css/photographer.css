@@ -321,6 +321,6 @@ option {
   line-height: normal;
   text-align: left;
   position: absolute;
-  left: 50%; /* Placez le titre au milieu horizontalement */
-  transform: translate(-50%, -50%); /* Déplacez le titre au centre */
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
