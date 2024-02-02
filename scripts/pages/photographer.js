@@ -98,14 +98,14 @@ function openLightbox(index) {
     video.style.display = "none";
     img.src = "";
     video.src = "";
-    img.removeAttribute('aria-label');
+    img.removeAttribute('alt');
     video.removeAttribute('aria-label');
 
     const media = mediaList[currentIndex];
     if (media.tagName == "IMG") {
         img.src = media.src;
         img.style.display = "block";
-        img.setAttribute('aria-label', `${media.alt}`);
+        img.setAttribute('alt', `${media.alt}`);
         title.textContent = media.alt;
     } else {
         video.src = media.src;
@@ -149,14 +149,14 @@ function changeMedia(step) {
     video.style.display = "none";
     img.src = "";
     video.src = "";
-    img.removeAttribute('aria-label');
+    img.removeAttribute('alt');
     video.removeAttribute('aria-label');
 
     const media = mediaList[currentIndex];
     if (media.tagName == "IMG") {
         img.src = media.src;
         img.style.display = "block";
-        img.setAttribute('aria-label', `${media.alt}`);
+        img.setAttribute('alt', `${media.alt}`);
         title.textContent = media.alt;
     } else {
         video.src = media.src;
